@@ -1,0 +1,136 @@
+//This grid is based http://philipwalton.github.io/solved-by-flexbox/
+//Mixins are inefficient in terms of code duplication but when post Processed
+//By csso duplication can be removed. The point is not everything needs to happen
+//at the preprocess stage.
+
+//FLEX
+@mixin flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+//FLEX ITEM
+
+@mixin flex-item {
+  //https://github.com/philipwalton/flexbugs
+  /**
+ * Flexbug demo 4.1.a (workaround)
+ *
+ * 1. Always add a unit to `flex-basis`
+ *    values. Note, prefer `0%` to `0px`
+ *    since some minifiers will convert
+ *   `0px` to just `0`.
+ */
+  flex: 1 0 0%;
+  /**
+ * Flexbug demo 1.2.b (workaround)
+ *
+ * 1. Set an explicit `flex-shrink` of 0
+ *    to prevent browsers from letting
+ *    elements shink to smaller than
+ *    their default minimum content
+ *    size.
+ */
+  flex-shrink:0;
+
+  /**
+ * Flexbug demo 2.1.b (workaround)
+ *
+ * 1. Set `max-width:100%` to prevent
+ *    overflow.
+ * 2. Set `box-sizing:border-box` if
+ *    needed to account for padding
+ *    and border size.
+ */
+  max-width:100%;
+
+  flex-grow: 1;
+
+}
+
+//Experiemental RTL mixin
+@mixin flex-rtl{
+  @if $localize-rtl{
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+  flex-direction: row-reverse;
+}
+
+
+//FLEX SIZING
+
+@mixin flex--fit{ > %flex-cell {
+  flex: 1;
+}}
+@mixin flex--full{ > %flex-cell {
+  flex: 0 0 100%;
+}}
+@mixin flex--1of2{ > %flex-cell {
+  flex: 0 0 50%
+}}
+@mixin flex--1of3{ > %flex-cell {
+  flex: 0 0 33.3333%
+}}
+@mixin flex--1of4{ > %flex-cell {
+  flex: 0 0 25%
+}}
+
+//flex Gutters
+
+@mixin flex--gutters($flex-container, $flex-item) {
+  .#{$flex-container} {
+    margin-left: -1em;
+    > .#{$flex-item} {
+      padding-left: 1em;
+      @content
+    }
+  }
+}
+@mixin flex--guttersLarge($flex-container, $flex-item) {
+  .#{$flex-container}{
+    margin-left: -1.5em;
+    > .#{$flex-item} {
+      padding-left: 1.5em;
+    }
+  }
+}
+@mixin flex--gutters2x($flex-container, $flex-item) {
+  .#{$flex-container}{
+    margin-left: -2em;
+    > .#{$flex-item} {
+      padding-left: 2em;
+    }
+  }
+}
+@mixin flex--gutters3x($flex-container, $flex-item) {
+  .#{$flex-container}{
+    margin-left: -3em;
+    > .#{$flex-item} {
+      padding-left: 3em;
+    }
+  }
+}
+
+// Cell Sizing
+@mixin flex-cell-full {
+  flex: 0 0 100%;
+}
+@mixin flex-cell-1of2 {
+  flex: 0 0 50%
+}
+@mixin flex-cell-1of3 {
+  flex: 0 0 33.3333%
+}
+@mixin flex-cell-2of3 {
+  flex: 0 0 66.6667%;
+}
+@mixin flex-cell-1of4 {
+  flex: 0 0 25%
+}
+@mixin flex-cell-3of4 {
+  flex: 0 0 75%;
+}
+@mixin flex-cell-1of10 {
+  flex: 0 0 10%;
+}

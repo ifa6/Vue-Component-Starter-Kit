@@ -1,0 +1,231 @@
+
+// ==========  BASE FUNCTIONS  ==========
+//REM  Calc font size
+@function calculateRem($size) {
+
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@function color($key){
+  @if map-has-key($colors, $key){
+    @return map-get($colors, key);
+  }
+}
+
+// ==========  BASE MIXINS  ==========
+// Text Mixins
+// --------------------------------------------------
+
+@mixin font-size($size) {
+  font-size: $size; /* ie8 fallback */
+  font-size: calculateRem($size);
+}
+
+@mixin max-media($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint){
+    @media(max-width:(map-get($breakpoints, $breakpoint) - 1) + px){
+      @content
+    }
+  }
+  @else if round($breakpoint) == $breakpoint{
+    @media(min-width:$breakpoint){
+      @content
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map. or a valid interger";
+  }
+}
+
+@mixin min-media($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint){
+    @media(min-width:(map-get($breakpoints, $breakpoint)) + px){
+      @content
+    }
+  }
+  @else if round($breakpoint) == $breakpoint{
+    @media(min-width:$breakpoint){
+      @content
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map. or a valid interger";
+  }
+}
+
+// ==========  VARIABLES  ==========
+
+$default-font-family:'Roboto', sans-serif;
+
+//From http://www.gridlover.net/app/ Font Size 17px, Line height1.25, Scale Factor 1.333 (3:4 -perfectfourth)
+$base-font-size: 12px;
+$base-line-height: 18px;
+$measure: 760px;
+
+$body-2-font-size:12px;
+$body-2-line-height:18px;
+
+$h1-font-size: 36px;
+$h1-line: 20px;
+$h1-lines: 1.5;
+$h1-line-height: $h1-font-size * $h1-lines;
+$h1-margin-top: 2 * $h1-line;
+$h1-margin-bottom: 1 * $h1-line;
+
+$h2-font-size: 24px;
+$h2-line: 16px;
+$h2-lines: 1.5;
+$h2-line-height: $h2-font-size * $h2-lines;
+$h2-margin-top: 2 * $h2-line;
+$h2-margin-bottom: 1 * $h2-line;
+
+$h3-font-size: 16px;
+$h3-line: 14px;
+$h3-lines: 1.5;
+$h3-line-height: $h3-font-size * $h3-lines;
+$h3-margin-top: 1 * $h3-line;
+$h3-margin-bottom: 1 * $h3-line;
+
+$h4-font-size: 14px;
+$h4-line: 12px;
+$h4-lines: 1.5;
+$h4-line-height: $h4-font-size * $h4-lines;
+$h4-margin-top: 1 * $h4-line;
+$h4-margin-bottom: 1 * $h4-line;
+
+
+
+
+%body-2{
+  font-size: calculateRem($body-2-font-size);
+  line-height: calculateRem($body-2-line-height);
+}
+
+ %h1 {
+  font-size: calculateRem($h1-font-size);
+  line-height: calculateRem($h1-line-height);
+  @at-root %h1--margin{
+    margin-top: calculateRem($h1-margin-top);
+    margin-bottom: calculateRem($h1-margin-bottom);
+  }
+
+}
+%h2 {
+  font-size: calculateRem($h2-font-size);
+  line-height: calculateRem($h2-line-height);
+  @at-root %h2--margin{
+    margin-top: calculateRem($h2-margin-top);
+    margin-bottom: calculateRem($h2-margin-bottom);
+  }
+}
+%h3 {
+  font-size: calculateRem($h3-font-size);
+  line-height: calculateRem($h3-line-height);
+  @at-root %h3--margin{
+    margin-top: calculateRem($h3-margin-top);
+    margin-bottom: calculateRem($h3-margin-bottom);
+  }
+
+}
+%h4 {
+  font-size: calculateRem($h4-font-size);
+  line-height: calculateRem($h4-line-height);
+  @at-root %h4--margin{
+    margin-top: calculateRem($h4-margin-top);
+    margin-bottom: calculateRem($h4-margin-top);
+  }
+}
+
+
+$gutter:1rem !default;
+
+
+
+//z-depth
+$z-1: 0px 1px 1.5px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.24);
+$z-2: 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 3px 3px rgba(0, 0, 0, 0.23);
+$z-3: 0px 10px 10px rgba(0, 0, 0, 0.19), 0px 6px 3px rgba(0, 0, 0, 0.23);
+$z-4: 0px 14px 14px rgba(0, 0, 0, 0.25), 0px 10px 5px rgba(0, 0, 0, 0.22);
+$z-5: 0px 19px 19px rgba(0, 0, 0, 0.30), 0px 15px 6px rgba(0, 0, 0, 0.22);
+
+$zIndex-1:9;
+$zIndex-2:19;
+$zIndex-3:199;
+$zIndex-4:1999;
+$zIndex-5:19999;
+
+$zh-1: -1px  0px 1.5px rgba(0, 0, 0, 0.12), -1px 0px 1px rgba(0, 0, 0, 0.24);
+$zh-2:-3px 0px  3px rgba(0, 0, 0, 0.16), -3px 0px  3px rgba(0, 0, 0, 0.23);
+
+//Vertical shadow
+@mixin vShaodw-1($color){
+  box-shadow:0px 1px 1.5px rgba($color, 0.12), 0px 1px 1px rgba($color, 0.24);
+}
+
+@mixin vShaodw-2($color){
+  box-shadow:0px 3px 3px rgba($color, 0.16), 0px 3px 3px rgba($color, 0.23);
+}
+
+@mixin vShaodw-3($color){
+  box-shadow:0px 10px 10px rgba($color, 0.19), 0px 6px 3px rgba($color, 0.23);
+}
+
+@mixin vShaodw-4($color){
+  box-shadow:0px 14px 14px rgba($color, 0.25), 0px 10px 5px rgba($color, 0.22);
+}
+
+@mixin vShaodw-5($color){
+  box-shadow:0px 19px 19px rgba($color, 0.30), 0px 15px 6px rgba($color, 0.22);
+}
+
+//Horizontal Shadow
+@mixin hShaodw-1($color){
+  box-shadow: 1px 0px 1.5px rgba($color, 0.12), 1px 0px 1px rgba($color, 0.24);
+}
+
+@mixin hShaodw-2($color){
+  box-shadow:3px 0px 3px rgba($color, 0.16), 3px 0px 3px rgba($color, 0.23);
+}
+
+@mixin hShaodw-3($color){
+  box-shadow: 10px 0px 10px rgba($color, 0.19), 6px 0px 3px rgba($color, 0.23);
+}
+
+@mixin hShaodw-4($color){
+  box-shadow:14px 0px 14px rgba($color, 0.25), 10px 0px 5px rgba($color, 0.22);
+}
+
+@mixin hShaodw-5($color){
+  box-shadow: 19px 0px 19px rgba($color, 0.30),  15px 0px 6px rgba($color, 0.22);
+}
+
+
+
+
+
+
+//keylines
+
+//0 ***
+//2
+//4 *
+//8 ******
+//12
+//16 ***
+//24
+//36
+//48
+//56
+//72
+
+
+
+
+
+
+
+
+
