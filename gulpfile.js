@@ -109,7 +109,9 @@ gulp.task('default',['webpack:watch'], function () {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: 'app'
+        server: 'app',
+        //Port number may need to change based on browser sync instances running
+        port: 3009
     });
     gulp.watch(['app/src/**/*.scss'], ['styles', reload ]);
     gulp.watch('app/build/*.js').on("change", browserSync.reload);;

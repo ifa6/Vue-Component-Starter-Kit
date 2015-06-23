@@ -1,7 +1,7 @@
 <style src="sub-component.css"></style>
 
 <template>
-
+<h1>I am sub-component<h1>
 </template>
 
 <script>
