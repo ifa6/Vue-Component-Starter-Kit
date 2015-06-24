@@ -1,7 +1,7 @@
 <style src="component.css"></style>
 
 <template>
-<h1 class="{{styles.dove}}">I am component</h1>
+<h1 class="{{styles.dove}}" v-if="test">I am component</h1>
 </template>
 
 <script lang="babel">
@@ -9,7 +9,8 @@
     module.exports = {
         data: function () {
             return {
-                styles:styles
+                styles:styles,
+                test:true
             }
         }
     }

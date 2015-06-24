@@ -37,7 +37,7 @@
 		<key>customizableLayout</key>
 		<dict>
 			<key>frame</key>
-			<string>{{0, 0}, {1170, 725}}</string>
+			<string>{{0, 0}, {1170, 697}}</string>
 			<key>identifier</key>
 			<string>container 9</string>
 			<key>isCustomizableViewContainer</key>
@@ -50,7 +50,7 @@
 			<array>
 				<dict>
 					<key>frame</key>
-					<string>{{0, 0}, {899, 725}}</string>
+					<string>{{0, 0}, {899, 697}}</string>
 					<key>identifier</key>
 					<string>container 7</string>
 					<key>isCustomizableViewContainer</key>
@@ -63,7 +63,7 @@
 					<array>
 						<dict>
 							<key>frame</key>
-							<string>{{0, 0}, {135, 725}}</string>
+							<string>{{0, 0}, {135, 697}}</string>
 							<key>identifier</key>
 							<string>container 2</string>
 							<key>isCustomizableViewContainer</key>
@@ -76,7 +76,7 @@
 							<array>
 								<dict>
 									<key>frame</key>
-									<string>{{0, 0}, {135, 725}}</string>
+									<string>{{0, 0}, {135, 697}}</string>
 									<key>identifier</key>
 									<string>sceneSelectorCustomizableContainer</string>
 									<key>isCustomizableViewContainer</key>
@@ -86,7 +86,7 @@
 						</dict>
 						<dict>
 							<key>frame</key>
-							<string>{{136, 0}, {763, 725}}</string>
+							<string>{{136, 0}, {763, 697}}</string>
 							<key>identifier</key>
 							<string>container 5</string>
 							<key>isCustomizableViewContainer</key>
@@ -99,7 +99,7 @@
 							<array>
 								<dict>
 									<key>frame</key>
-									<string>{{136, 0}, {763, 284}}</string>
+									<string>{{136, 0}, {763, 256}}</string>
 									<key>identifier</key>
 									<string>container 4</string>
 									<key>isCustomizableViewContainer</key>
@@ -112,7 +112,7 @@
 									<array>
 										<dict>
 											<key>frame</key>
-											<string>{{136, 0}, {763, 284}}</string>
+											<string>{{136, 0}, {763, 256}}</string>
 											<key>identifier</key>
 											<string>timelineCustomizableContainer</string>
 											<key>isCustomizableViewContainer</key>
@@ -122,7 +122,7 @@
 								</dict>
 								<dict>
 									<key>frame</key>
-									<string>{{136, 285}, {763, 440}}</string>
+									<string>{{136, 257}, {763, 440}}</string>
 									<key>identifier</key>
 									<string>container 3</string>
 									<key>isCustomizableViewContainer</key>
@@ -135,7 +135,7 @@
 									<array>
 										<dict>
 											<key>frame</key>
-											<string>{{136, 285}, {763, 440}}</string>
+											<string>{{136, 257}, {763, 440}}</string>
 											<key>identifier</key>
 											<string>sceneEditorCustomizableContainer</string>
 											<key>isCustomizableViewContainer</key>
@@ -149,7 +149,7 @@
 				</dict>
 				<dict>
 					<key>frame</key>
-					<string>{{900, 0}, {270, 725}}</string>
+					<string>{{900, 0}, {270, 697}}</string>
 					<key>identifier</key>
 					<string>container 6</string>
 					<key>isCustomizableViewContainer</key>
@@ -162,7 +162,7 @@
 					<array>
 						<dict>
 							<key>frame</key>
-							<string>{{900, 0}, {270, 725}}</string>
+							<string>{{900, 0}, {270, 697}}</string>
 							<key>identifier</key>
 							<string>inspectorCustomizableContainer</string>
 							<key>isCustomizableViewContainer</key>
@@ -175,7 +175,7 @@
 		<key>keyframeTimelineHeight</key>
 		<real>124</real>
 		<key>mainWindowFrame</key>
-		<string>135 124 1170 747 0 0 1440 877 </string>
+		<string>0 58 1170 719 0 0 1440 877 </string>
 		<key>openTabs</key>
 		<array/>
 		<key>selectedTabIndex</key>
@@ -360,6 +360,18 @@
 							<string>BorderStyleBottom</string>
 							<key>objectValue</key>
 							<string>None</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>OriginalWidth</string>
+							<key>objectValue</key>
+							<string>300px</string>
+						</dict>
+						<dict>
+							<key>identifier</key>
+							<string>OriginalHeight</string>
+							<key>objectValue</key>
+							<string>200px</string>
 						</dict>
 						<dict>
 							<key>identifier</key>

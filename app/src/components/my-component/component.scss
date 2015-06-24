@@ -1,7 +1,15 @@
 @import "../StyleVars.json";
 @import "../utilities/base";
 
-.dove{
+%dove{
   color:red;
   display:flex;
+}
+
+.dove{
+  @extend %dove;
+}
+
+.boat{
+  @extend %dove;
 }
