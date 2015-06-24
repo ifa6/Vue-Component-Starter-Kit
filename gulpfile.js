@@ -111,7 +111,8 @@ gulp.task('default',['webpack:watch'], function () {
         // https: true,
         server: 'app',
         //Port number may need to change based on browser sync instances running
-        port: 3009
+        port: 3009,
+        open: false
     });
     gulp.watch(['app/src/**/*.scss'], ['styles', reload ]);
     gulp.watch('app/build/*.js').on("change", browserSync.reload);;
