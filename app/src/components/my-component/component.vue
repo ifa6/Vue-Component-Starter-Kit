@@ -1,13 +1,16 @@
 <style src="component.css"></style>
 
 <template>
-<h1>I am component</h1>
+<h1 class="{{styles.dove}}">I am component</h1>
 </template>
 
-<script>
+<script lang="babel">
+    import styles from './component.css';
     module.exports = {
         data: function () {
-            return {}
+            return {
+                styles:styles
+            }
         }
     }
 </script>
