@@ -13,8 +13,8 @@
 	<key>displayedAttributes</key>
 	<array>
 		<string>kPropertiesMenuItemIdentifierOpacity</string>
-		<string>kPropertiesMenuItemIdentifierPosition</string>
 		<string>kPropertiesMenuItemIdentifierAnimated</string>
+		<string>kPropertiesMenuItemIdentifierPosition</string>
 	</array>
 	<key>documentVersion</key>
 	<string>458</string>
@@ -29,7 +29,7 @@
 	<key>guidesAreVisible</key>
 	<true/>
 	<key>lastCheckDate</key>
-	<date>2015-06-23T21:06:48Z</date>
+	<date>2015-06-23T22:25:58Z</date>
 	<key>layout</key>
 	<dict>
 		<key>currentInspectorPane</key>
@@ -296,9 +296,11 @@
 	<array>
 		<dict>
 			<key>documentIdentifier</key>
-			<string>C6DECC66-F6CC-43BB-8E93-F95411976A47-36884-000154F6718A624B</string>
+			<string>E39D93A2-EBB5-4737-A1BA-490348690CB3-37226-0001593E33DDA694</string>
 			<key>selectedObjects</key>
-			<array/>
+			<array>
+				<string>4</string>
+			</array>
 			<key>symbol</key>
 			<dict>
 				<key>addToNewSceneControllers</key>

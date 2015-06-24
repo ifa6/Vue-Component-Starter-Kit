@@ -1,15 +1,13 @@
 <style src="component.css"></style>
 
 <template>
-<h1>I am a component</h1>
+<h1>I am component</h1>
 </template>
 
 <script>
     module.exports = {
         data: function () {
             return {}
-        },
-
-        replace:true
+        }
     }
 </script>

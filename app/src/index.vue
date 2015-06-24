@@ -2,7 +2,6 @@
 
 <template>
    <my-component></my-component>
-    <sub-component></sub-component>
 </template>
 
 <script>
@@ -10,8 +9,7 @@
         data: {
         },
         components: {
-            "my-component": require('./components/component.vue'),
-            "sub-component": require('./components/sub-component/sub-component.vue')
+            "my-component": require('./components/my-component/component.vue')
         }
 
     }
