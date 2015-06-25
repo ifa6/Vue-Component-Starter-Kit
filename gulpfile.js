@@ -95,8 +95,8 @@ gulp.task('default',['webpack:watch'], function () {
         server: 'app',
         open: false
     });
-    gulp.watch(['app/src/**/*.scss'], ['styles', reload ]);
-    gulp.watch('app/build/*.js').on("change", browserSync.reload);;
+    gulp.watch('app/src/**/*.scss', 'styles');
+    gulp.watch('app/build/*.js').on("change", browserSync.reload);
 });
 
 

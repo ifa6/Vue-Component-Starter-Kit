@@ -1,8 +1,8 @@
 <style  src="components/styles.css"></style>
 
 <template>
-   <my-component></my-component>
-    <my-component-2></my-component-2>
+   <my-component  v-if="component" v-style=""></my-component>
+    <my-component-2 v-if="component2"></my-component-2>
 </template>
 
 <script lang="babel">
@@ -10,6 +10,8 @@
     import myComponent2 from './components/my-component-2/component.vue'
     module.exports = {
         data: {
+            component:true,
+            component2:true,
         },
         components: {
             "my-component": myComponent,

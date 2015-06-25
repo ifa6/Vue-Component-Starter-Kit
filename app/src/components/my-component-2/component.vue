@@ -1,7 +1,7 @@
 <style src="component.css"></style>
 
 <template>
-<h1 class="{{styles.dove}}" v-if="test || green || !red" v-style="">I am component 2</h1>
+<h1 class="{{styles.dove}}"  >I am component 2</h1>
 </template>
 
 <script lang="babel">
@@ -9,13 +9,10 @@
     module.exports = {
         data: function () {
             return {
-                styles:styles,
-                test:false,
-                green:true
+                styles:styles
             }
         },
         compiled:function(){
-            console.log(this._directives);
         }
     }
 </script>
