@@ -93,8 +93,6 @@ gulp.task('default',['webpack:watch'], function () {
         //       will present a certificate warning in the browser.
         // https: true,
         server: 'app',
-        //Port number may need to change based on browser sync instances running
-        port: 3009,
         open: false
     });
     gulp.watch(['app/src/**/*.scss'], ['styles', reload ]);
