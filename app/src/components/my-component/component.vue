@@ -6,13 +6,11 @@
 
 <script lang="babel">
     import styles from './component.css';
-    module.exports = {
+    export default{
         data: function () {
             return {
                 styles:styles
             }
-        },
-        compiled:function(){
         }
     }
 </script>
