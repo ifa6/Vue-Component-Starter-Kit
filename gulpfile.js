@@ -16,6 +16,8 @@ var inject = require("gulp-inject");
 var sass = require('gulp-ruby-sass');
 var notify = require('gulp-notify');
 var svgSprite = require('gulp-svg-sprite');
+var ghPages = require('gulp-gh-pages');
+
 var handleErrors  = function() {
 
     var args = Array.prototype.slice.call(arguments);
@@ -139,4 +141,9 @@ gulp.task('styles', function() {
         .pipe($.sourcemaps.write())
         .pipe(gulp.dest('app/src/components'))
         .pipe($.size({title: 'sass'}));
+});
+
+gulp.task('ghPages', function() {
+    return gulp.src('./app/**/*')
+        .pipe(ghPages());
 });
