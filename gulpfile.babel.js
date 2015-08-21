@@ -1,5 +1,3 @@
-
-
 'use strict';
 
 // Include Gulp & Tools We'll Use
@@ -13,10 +11,14 @@ var gutil = require("gulp-util");
 var webpack = require("webpack");
 var webpackConfig = require("./webpack.config.js");
 var inject = require("gulp-inject");
-var sass = require('gulp-ruby-sass');
 var notify = require('gulp-notify');
 var svgSprite = require('gulp-svg-sprite');
 var ghPages = require('gulp-gh-pages');
+var rename = require("gulp-rename");
+var replace = require('gulp-replace');
+var argv = require('yargs').argv;
+var fs = require('fs');
+
 
 var handleErrors  = function() {
 
@@ -32,9 +34,28 @@ var handleErrors  = function() {
     this.emit('end');
 };
 
+// Copy all files at the root level (app)
+gulp.task('copy', () =>
+gulp.src([
+    'app/index.html',
+    'app/**/*',
+    '!app/components/**/*.vue',
+    '!app/components/**/*.js',
+    '!app/components/**/*.css',
+    '!app/components/**/*.md',
+    '!app/components/**/*.scss'
+    //'node_modules/apache-server-configs/dist/.htaccess'
+], {
+    dot: true
+}).pipe(gulp.dest('dist'))
+    .pipe($.size({title: 'copy'}))
+);
+
+
+
 // Lint JavaScript
 gulp.task('jshint', function () {
-    return gulp.src(['app/src/**/*.js'])
+    return gulp.src(['app/**/*.js'])
         .pipe(reload({stream: true, once: true}))
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
@@ -43,20 +64,34 @@ gulp.task('jshint', function () {
 
 //Inject Sprite
 gulp.task('inject:sprite', function () {
-    var target = gulp.src('./app/src/components/uti/sprite/sprite.vue');
+    var target = gulp.src('./app/components/uti/sprite/sprite.vue');
 
 
-    return target.pipe(inject(gulp.src(['./app/src/images/symbol/svg/sprite.symbol.svg']), {
+    return target.pipe(inject(gulp.src(['./app/images/symbol/svg/sprite.symbol.svg']), {
             starttag: '<!-- inject:svg -->',
             transform: function (filePath, file) {
                 // return file contents as string
                 return file.contents.toString('utf8')
             }
         }))
-        .pipe(gulp.dest('./app/src/components/uti/sprite/'));
+        .pipe(gulp.dest('./app/components/uti/sprite/'));
 });
 
-gulp.task('webpack:watch',['styles'], function(cb) {
+gulp.task('inject:block', function () {
+    var target = gulp.src('.webpack.config.js');
+
+
+    return target.pipe(inject(gulp.src([argv.name]), {
+        starttag: '<!-- inject:svg -->',
+        transform: function (filePath, file) {
+            // return file contents as string
+            return file.contents.toString('utf8')
+        }
+    }))
+        .pipe(gulp.dest('./app/components/uti/sprite/'));
+});
+
+gulp.task('webpack:watch', function(cb) {
 // modify some webpack config options
     var myConfig = Object.create(webpackConfig);
     myConfig.devtool = "sourcemap";
@@ -74,18 +109,26 @@ gulp.task('webpack:watch',['styles'], function(cb) {
     return cb();
 });
 
-// Clean Output Directory
-gulp.task('clean:build', del.bind(null, [ 'app/build/*'], {dot: true}));
+// Clean Outputs
+gulp.task('clean:dist', del.bind(null, [ 'dist/*'], {dot: true}));
 // Clean Built CSS
-gulp.task('clean:css', del.bind(null, [ 'app/src/components/**/*.css'], {dot: true}));
+gulp.task('clean:css', del.bind(null, [ 'app/components/**/*.css'], {dot: true}));
 
 //Clean task
-gulp.task('clean', [ 'clean:build', 'clean:css']);
+gulp.task('clean', [ 'clean:dist', 'clean:css']);
 
+
+gulp.task('startup', ['clean'], cb =>
+        runSequence(
+            'styles',
+            ['copy', 'webpack:watch'],
+            cb
+        )
+);
 
 
 // Watch Files For Changes & Reload
-gulp.task('default',['webpack:watch'], function () {
+gulp.task('default',['startup'], function () {
     browserSync({
         notify: false,
         // Customize the BrowserSync console logging prefix
@@ -94,36 +137,37 @@ gulp.task('default',['webpack:watch'], function () {
         // Note: this uses an unsigned certificate which on first access
         //       will present a certificate warning in the browser.
         // https: true,
-        server: 'app',
+        server: 'dist',
         open: false
     });
-    gulp.watch('app/src/**/*.scss', ['styles']);
-    gulp.watch('app/build/*.js').on("change", browserSync.reload);
+    gulp.watch('app/components/**/*.scss', ['styles']);
+    gulp.watch('app/components/utilities/**/*.scss', ['sass-json']);
+    gulp.watch('dist/js/*.js').on("change", browserSync.reload);
 });
 
 
 //Build svg icon sprite sheet
 gulp.task('sprite', function(){
-    return gulp.src('app/src/images/icons/*.svg')
+    return gulp.src('app/images/icons/*.svg')
         .pipe(svgSprite({
             mode:{
                 symbol:true
             }
         }))
-        .pipe(gulp.dest("app/src/images"))
+        .pipe(gulp.dest("app/images"))
         .pipe($.size({title: 'sprite'}));
 });
 
 
 //Build svg sprite sheet
 gulp.task('svg:background', function(){
-    return gulp.src('app/src/images/background/*.svg')
+    return gulp.src('app/images/background/*.svg')
         .pipe($.svgSprites({
             mode:"defs",
             svgId: "svg-%f",
             preview: false
         }))
-        .pipe(gulp.dest("app/src/images"))
+        .pipe(gulp.dest("app/images"))
         .pipe($.size({title: 'svg:background'}));
 });
 
@@ -132,14 +176,12 @@ gulp.task('svg', [ 'svg:icon', 'svg:background']);
 
 // Compile SCSS
 gulp.task('styles', function() {
-    return sass('app/src/components', {
-        require: 'sass-json-vars',
-        noCache: true,
-        sourcemap: true
-        })
+    return gulp.src('./app/components/**/*.scss')
+        .pipe($.sourcemaps.init())
+        .pipe($.sass())
         .on('error', handleErrors)
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('app/src/components'))
+        .pipe(gulp.dest('./app/components'))
         .pipe($.size({title: 'sass'}));
 });
 
@@ -147,3 +189,33 @@ gulp.task('ghPages', function() {
     return gulp.src('./app/**/*')
         .pipe(ghPages());
 });
+
+
+gulp.task('block', function(){
+    var path ='app/components/blocks/' + argv.name
+    if( fs.existsSync(path)){
+        console.log("CHECK THE BLOCK NAME PLEASE")
+    }else
+    {
+        gulp.src('lib/gulp-templates/block/**/**')
+            .pipe(rename(function (path) {
+                if (path.basename.indexOf('block') > -1) {
+                    path.basename = path.basename.replace('block', argv.name);
+                }
+            }))
+            .pipe(replace('block', argv.name))
+            .pipe(gulp.dest(path));
+    }
+});
+
+gulp.task('sass-json', function () {
+    return gulp
+        .src('./app/components/utilities/styles/*.scss')
+        .pipe($.sassJson())
+        .pipe(gulp.dest('../app/components/utilities/sass-json-vars'));
+});
+
+
+
+
+

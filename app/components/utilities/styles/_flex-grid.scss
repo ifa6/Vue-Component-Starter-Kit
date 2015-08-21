@@ -9,9 +9,9 @@
   flex-wrap: wrap;
 }
 
-//FLEX ITEM
+//FLEX CELL
 
-@mixin flex-item {
+@mixin flex-cell {
   //https://github.com/philipwalton/flexbugs
   /**
  * Flexbug demo 4.1.a (workaround)
@@ -60,77 +60,90 @@
 
 //FLEX SIZING
 
-@mixin flex--fit{ > %flex-cell {
-  flex: 1;
-}}
-@mixin flex--full{ > %flex-cell {
-  flex: 0 0 100%;
-}}
-@mixin flex--1of2{ > %flex-cell {
-  flex: 0 0 50%
-}}
-@mixin flex--1of3{ > %flex-cell {
-  flex: 0 0 33.3333%
-}}
-@mixin flex--1of4{ > %flex-cell {
-  flex: 0 0 25%
-}}
+@mixin flex--fit($flex-cell){
+  @include flex;
+  > .#{$flex-cell} {
+    flex: 1;
+  }}
+@mixin flex--full($flex-cell){
+  @include flex;
+  > .#{$flex-cell} {
+    flex: 0 0 100%;
+  }}
+@mixin flex--1of2($flex-cell){
+  @include flex;
+  > .#{$flex-cell} {
+    flex: 0 0 50%
+  }}
+@mixin flex--1of3($flex-cell){
+  @include flex;
+  > .#{$flex-cell} {
+    flex: 0 0 33.3333%
+  }}
+@mixin flex--1of4($flex-cell){
+  @include flex;
+  > .#{$flex-cell} {
+    flex: 0 0 25%
+  }}
 
 //flex Gutters
 
-@mixin flex--gutters($flex-container, $flex-item) {
-  .#{$flex-container} {
-    margin-left: -1em;
-    > .#{$flex-item} {
+@mixin flex--gutters($flex-cells) {
+  margin-left: -1em;
+  @for $i from 1 through length($flex-cells) {
+    > .#{nth($flex-cells, $i)} {
       padding-left: 1em;
       @content
     }
   }
 }
-@mixin flex--guttersLarge($flex-container, $flex-item) {
-  .#{$flex-container}{
-    margin-left: -1.5em;
-    > .#{$flex-item} {
+
+@mixin flex--guttersLarge($flex-cells) {
+  margin-left: -1.5em;
+  @for $i from 1 through length($flex-cells) {
+    > .#{nth($flex-cells, $i)} {
       padding-left: 1.5em;
     }
   }
 }
-@mixin flex--gutters2x($flex-container, $flex-item) {
-  .#{$flex-container}{
-    margin-left: -2em;
-    > .#{$flex-item} {
+
+@mixin flex--gutters2x($flex-cells) {
+  margin-left: -2em;
+  @for $i from 1 through length($flex-cells) {
+    > .#{nth($flex-cells, $i)} {
       padding-left: 2em;
     }
   }
 }
-@mixin flex--gutters3x($flex-container, $flex-item) {
-  .#{$flex-container}{
-    margin-left: -3em;
-    > .#{$flex-item} {
+
+@mixin flex--gutters3x($flex-cells) {
+  margin-left: -3em;
+  @for $i from 1 through length($flex-cells) {
+    > .#{nth($flex-cells, $i)} {
       padding-left: 3em;
     }
   }
 }
 
 // Cell Sizing
-@mixin flex-cell-full {
+@mixin flex-cell--full {
   flex: 0 0 100%;
 }
-@mixin flex-cell-1of2 {
+@mixin flex-cell--1of2 {
   flex: 0 0 50%
 }
-@mixin flex-cell-1of3 {
+@mixin flex-cell--1of3 {
   flex: 0 0 33.3333%
 }
-@mixin flex-cell-2of3 {
+@mixin flex-cell--2of3 {
   flex: 0 0 66.6667%;
 }
-@mixin flex-cell-1of4 {
+@mixin flex-cell--1of4 {
   flex: 0 0 25%
 }
-@mixin flex-cell-3of4 {
+@mixin flex-cell--3of4 {
   flex: 0 0 75%;
 }
-@mixin flex-cell-1of10 {
+@mixin flex-cell--1of10 {
   flex: 0 0 10%;
 }

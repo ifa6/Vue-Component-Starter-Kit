@@ -1,0 +1,33 @@
+@mixin max-media($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint){
+    @media(max-width:(map-get($breakpoints, $breakpoint) - 1) + px){
+      @content
+    }
+  }
+  @else if round($breakpoint) == $breakpoint{
+    @media(max-width:$breakpoint){
+      @content
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map. or a valid interger";
+  }
+}
+
+@mixin min-media($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint){
+    @media(min-width:(map-get($breakpoints, $breakpoint)) + px){
+      @content
+    }
+  }
+  @else if round($breakpoint) == $breakpoint{
+    @media(min-width:$breakpoint){
+      @content
+    }
+  }
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map. or a valid interger";
+  }
+}

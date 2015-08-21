@@ -1,0 +1,57 @@
+//z-depth
+$z-1: 0px 1px 1.5px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.24);
+$z-2: 0px 3px 3px rgba(0, 0, 0, 0.16), 0px 3px 3px rgba(0, 0, 0, 0.23);
+$z-3: 0px 10px 10px rgba(0, 0, 0, 0.19), 0px 6px 3px rgba(0, 0, 0, 0.23);
+$z-4: 0px 14px 14px rgba(0, 0, 0, 0.25), 0px 10px 5px rgba(0, 0, 0, 0.22);
+$z-5: 0px 19px 19px rgba(0, 0, 0, 0.30), 0px 15px 6px rgba(0, 0, 0, 0.22);
+
+$zIndex-1:9;
+$zIndex-2:19;
+$zIndex-3:199;
+$zIndex-4:1999;
+$zIndex-5:19999;
+
+$zh-1: -1px  0px 1.5px rgba(0, 0, 0, 0.12), -1px 0px 1px rgba(0, 0, 0, 0.24);
+$zh-2:-3px 0px  3px rgba(0, 0, 0, 0.16), -3px 0px  3px rgba(0, 0, 0, 0.23);
+
+//Vertical shadow
+@mixin vShaodw-1($color){
+  box-shadow:0px 1px 1.5px rgba($color, 0.12), 0px 1px 1px rgba($color, 0.24);
+}
+
+@mixin vShaodw-2($color){
+  box-shadow:0px 3px 3px rgba($color, 0.16), 0px 3px 3px rgba($color, 0.23);
+}
+
+@mixin vShaodw-3($color){
+  box-shadow:0px 10px 10px rgba($color, 0.19), 0px 6px 3px rgba($color, 0.23);
+}
+
+@mixin vShaodw-4($color){
+  box-shadow:0px 14px 14px rgba($color, 0.25), 0px 10px 5px rgba($color, 0.22);
+}
+
+@mixin vShaodw-5($color){
+  box-shadow:0px 19px 19px rgba($color, 0.30), 0px 15px 6px rgba($color, 0.22);
+}
+
+//Horizontal Shadow
+@mixin hShaodw-1($color){
+  box-shadow: 1px 0px 1.5px rgba($color, 0.12), 1px 0px 1px rgba($color, 0.24);
+}
+
+@mixin hShaodw-2($color){
+  box-shadow:3px 0px 3px rgba($color, 0.16), 3px 0px 3px rgba($color, 0.23);
+}
+
+@mixin hShaodw-3($color){
+  box-shadow: 10px 0px 10px rgba($color, 0.19), 6px 0px 3px rgba($color, 0.23);
+}
+
+@mixin hShaodw-4($color){
+  box-shadow:14px 0px 14px rgba($color, 0.25), 10px 0px 5px rgba($color, 0.22);
+}
+
+@mixin hShaodw-5($color){
+  box-shadow: 19px 0px 19px rgba($color, 0.30),  15px 0px 6px rgba($color, 0.22);
+}
