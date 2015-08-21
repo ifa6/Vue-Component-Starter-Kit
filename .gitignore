@@ -3,5 +3,5 @@ node_modules/
 .idea/
 dist/
 Desktop.ini
-app/build/
-app/src/components/**/*.css
+app/components/**/*.css
+.publish/
