@@ -1,11 +1,11 @@
 @mixin max-media($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint){
-    @media(max-width:(map-get($breakpoints, $breakpoint) - 1) + px){
+  @if unitless($breakpoint) == true{
+    @media(max-width:($breakpoint - 1) + px){
       @content
     }
   }
-  @else if round($breakpoint) == $breakpoint{
-    @media(max-width:$breakpoint){
+  @else if unitless($breakpoint) == false{
+    @media(max-width:$breakpoint - 1px){
       @content
     }
   }
@@ -16,12 +16,12 @@
 }
 
 @mixin min-media($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint){
-    @media(min-width:(map-get($breakpoints, $breakpoint)) + px){
+  @if unitless($breakpoint) == true{
+    @media(min-width:$breakpoint + px){
       @content
     }
   }
-  @else if round($breakpoint) == $breakpoint{
+  @else if unitless($breakpoint) == false{
     @media(min-width:$breakpoint){
       @content
     }
