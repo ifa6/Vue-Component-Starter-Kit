@@ -1,5 +1,6 @@
-@import "utils";
-@import "reset";
+
+@import "_utils.scss";
+@import "./reset";
 :global{
   #component-wrapper{
     @include flex;

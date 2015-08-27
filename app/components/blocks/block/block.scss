@@ -1,0 +1,6 @@
+@import "../../utilities/styles/utils";
+.block{
+  width:$portraitS +px;
+  height:500px;
+  @include flex;
+}

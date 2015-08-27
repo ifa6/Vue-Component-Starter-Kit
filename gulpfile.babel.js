@@ -117,10 +117,9 @@ gulp.task('clean:css', del.bind(null, [ 'app/components/**/*.css'], {dot: true})
 //Clean task
 gulp.task('clean', [ 'clean:dist', 'clean:css']);
 
-
+//Startup tasks
 gulp.task('startup', ['clean'], cb =>
         runSequence(
-            'styles',
             ['copy', 'webpack:watch'],
             cb
         )
@@ -140,8 +139,6 @@ gulp.task('default',['startup'], function () {
         server: 'dist',
         open: false
     });
-    gulp.watch('app/components/**/*.scss', ['styles']);
-    gulp.watch('app/components/utilities/**/*.scss', ['sass-json']);
     gulp.watch('dist/js/*.js').on("change", browserSync.reload);
 });
 
@@ -174,22 +171,10 @@ gulp.task('svg:background', function(){
 // Output SVG Sprites
 gulp.task('svg', [ 'svg:icon', 'svg:background']);
 
-// Compile SCSS
-gulp.task('styles', function() {
-    return gulp.src('./app/components/**/*.scss')
-        .pipe($.sourcemaps.init())
-        .pipe($.sass())
-        .on('error', handleErrors)
-        .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('./app/components'))
-        .pipe($.size({title: 'sass'}));
-});
-
 gulp.task('ghPages', function() {
-    return gulp.src('./app/**/*')
+    return gulp.src('./dist/**/*')
         .pipe(ghPages());
 });
-
 
 gulp.task('block', function(){
     var path ='app/components/blocks/' + argv.name
@@ -197,7 +182,7 @@ gulp.task('block', function(){
         console.log("CHECK THE BLOCK NAME PLEASE")
     }else
     {
-        gulp.src('lib/gulp-templates/block/**/**')
+        gulp.src('libs/gulp/block/**/**')
             .pipe(rename(function (path) {
                 if (path.basename.indexOf('block') > -1) {
                     path.basename = path.basename.replace('block', argv.name);
@@ -208,12 +193,6 @@ gulp.task('block', function(){
     }
 });
 
-gulp.task('sass-json', function () {
-    return gulp
-        .src('./app/components/utilities/styles/*.scss')
-        .pipe($.sassJson())
-        .pipe(gulp.dest('../app/components/utilities/sass-json-vars'));
-});
 
 
 

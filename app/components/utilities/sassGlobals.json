@@ -1,0 +1,19 @@
+{
+    "breakpoints":{
+        "portraitS": "320",
+        "portraitM": "360",
+        "portraitL": "414",
+        "landscapeS": "568",
+        "landscapeM": "640",
+        "landscapeL": "736",
+        "tabletS": "768",
+        "tabletM": "860",
+        "tabletL": "1024",
+        "laptopS": "1280",
+        "laptopM": "1366",
+        "laptopL": "1440",
+        "desktopS": "1550",
+        "desktopM": "1680",
+        "desktopL": "192"
+    }
+}
